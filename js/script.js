@@ -892,6 +892,11 @@ var subjectThreeQuestionsList = [
 ];
 
 ruleta.addEventListener('click', girar);
+
+let turnoEquipo1 = true;
+let puntosEquipo1 = 0;
+let puntosEquipo2 = 0;
+
 function girar(){
     let rand = Math.random() * 7200;
     calcular(rand);
@@ -938,6 +943,11 @@ function mostrarPregunta(categoria){
         //mostrarPregunta(1);
         if(qst.options[0].isCorrect){
           Swal.fire('Correcta', '', 'success')
+          if(turnoEquipo1){
+            puntosEquipo1++;
+          }else{
+            puntosEquipo2++;
+          }
         }else{
           Swal.fire('Incorrecta', '', 'error')
         }
@@ -945,6 +955,11 @@ function mostrarPregunta(categoria){
         //mostrarPregunta(2);
         if(qst.options[1].isCorrect){
           Swal.fire('Correcta', '', 'success')
+          if(turnoEquipo1){
+            puntosEquipo1++;
+          }else{
+            puntosEquipo2++;
+          }
         }else{
           Swal.fire('Incorrecta', '', 'error')
         }
@@ -952,12 +967,22 @@ function mostrarPregunta(categoria){
         //mostrarPregunta(3);
         if(qst.options[2].isCorrect){
           Swal.fire('Correcta', '', 'success')
+          if(turnoEquipo1){
+            puntosEquipo1++;
+          }else{
+            puntosEquipo2++;
+          }
         }else{
           Swal.fire('Incorrecta', '', 'error')
         }
       }
+      turnoEquipo1 = !turnoEquipo1;
+      document.getElementById("equipo1").innerHTML = puntosEquipo1;
+      document.getElementById("equipo2").innerHTML = puntosEquipo2;
     });
+
   }
+
 }
 
 function premio(premios) {
@@ -972,7 +997,8 @@ function calcular(rand) {
   setTimeout(() => {
   switch (true) {
     case valor > 0 && valor <= 45:
-      console.log("Pierdes turno"); 
+      console.log("Pierdes turno");
+      turnoEquipo1 = !turnoEquipo1;
      break;
      case valor > 45 && valor <= 90:
       
