@@ -5,20 +5,16 @@
 
 body {
   font-family: "Oswald", sans-serif;
-  background: #667db6; /* fallback for old browsers */
+  background: #141e30; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #667db6,
-    #0082c8,
-    #0082c8,
-    #667db6
+    #243b55,
+    #141e30
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #667db6,
-    #0082c8,
-    #0082c8,
-    #667db6
+    #243b55,
+    #141e30
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -26,7 +22,7 @@ body {
   width: 0;
   height: 0;
   border: 30px solid transparent;
-  border-top: 50px solid #323232;
+  border-top: 50px solid #c42e35;
   border-bottom: 0;
   margin: auto;
   position: relative;
@@ -37,6 +33,7 @@ body {
 img {
   z-index: 100;
   transition: all 5s;
+  cursor: pointer;
 }
 
 #premio {

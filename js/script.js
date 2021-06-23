@@ -891,30 +891,31 @@ var subjectThreeQuestionsList = [
   },
 ];
 
-ruleta.addEventListener('click', girar);
+ruleta.addEventListener("click", girar);
 
 let turnoEquipo1 = true;
 let puntosEquipo1 = 0;
 let puntosEquipo2 = 0;
 
-function girar(){
-    let rand = Math.random() * 7200;
-    calcular(rand);
-    var sonido = document.querySelector('#audio');
-    sonido.setAttribute('src', 'sonido/ruleta.mp3');
+function girar() {
+  let rand = Math.random() * 7200;
+  calcular(rand);
+  var sonido = document.querySelector("#audio");
+  sonido.setAttribute("src", "sonido/ruleta.mp3");
 }
 
-function mostrarPregunta(categoria){
+function mostrarPregunta(categoria) {
   //0 Escoge tema - 1 OACA - 2 Teorias del aprendizaje  - 3 Web Social
   console.log(categoria);
-  if(!categoria){
+  if (!categoria) {
     Swal.fire({
-      title: 'Elige un tema',
+      title: "Elige un tema",
       showDenyButton: true,
       showCancelButton: true,
       cancelButtonText: `OACA`,
       confirmButtonText: `TEORÍAS DEL APRENDIZAJE`,
       denyButtonText: `WEB SOCIAL`,
+      allowOutsideClick: false,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isDismissed) {
@@ -923,12 +924,12 @@ function mostrarPregunta(categoria){
       } else if (result.isConfirmed) {
         mostrarPregunta(2);
         console.log("TAPRE");
-      } else if (result.isDenied){
+      } else if (result.isDenied) {
         mostrarPregunta(3);
         console.log("WEB");
       }
-    })
-  }else{
+    });
+  } else {
     let qst = getQuestionBySubject(categoria);
     Swal.fire({
       title: qst.question,
@@ -937,52 +938,51 @@ function mostrarPregunta(categoria){
       cancelButtonText: qst.options[0].title,
       confirmButtonText: qst.options[1].title,
       denyButtonText: qst.options[2].title,
+      allowOutsideClick: false,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isDismissed) {
         //mostrarPregunta(1);
-        if(qst.options[0].isCorrect){
-          Swal.fire('Correcta', '', 'success')
-          if(turnoEquipo1){
+        if (qst.options[0].isCorrect) {
+          Swal.fire("Correcta", "", "success");
+          if (turnoEquipo1) {
             puntosEquipo1++;
-          }else{
+          } else {
             puntosEquipo2++;
           }
-        }else{
-          Swal.fire('Incorrecta', '', 'error')
+        } else {
+          Swal.fire("Incorrecta", "", "error");
         }
       } else if (result.isConfirmed) {
         //mostrarPregunta(2);
-        if(qst.options[1].isCorrect){
-          Swal.fire('Correcta', '', 'success')
-          if(turnoEquipo1){
+        if (qst.options[1].isCorrect) {
+          Swal.fire("Correcta", "", "success");
+          if (turnoEquipo1) {
             puntosEquipo1++;
-          }else{
+          } else {
             puntosEquipo2++;
           }
-        }else{
-          Swal.fire('Incorrecta', '', 'error')
+        } else {
+          Swal.fire("Incorrecta", "", "error");
         }
-      } else if (result.isDenied){
+      } else if (result.isDenied) {
         //mostrarPregunta(3);
-        if(qst.options[2].isCorrect){
-          Swal.fire('Correcta', '', 'success')
-          if(turnoEquipo1){
+        if (qst.options[2].isCorrect) {
+          Swal.fire("Correcta", "", "success");
+          if (turnoEquipo1) {
             puntosEquipo1++;
-          }else{
+          } else {
             puntosEquipo2++;
           }
-        }else{
-          Swal.fire('Incorrecta', '', 'error')
+        } else {
+          Swal.fire("Incorrecta", "", "error");
         }
       }
       turnoEquipo1 = !turnoEquipo1;
       document.getElementById("equipo1").innerHTML = puntosEquipo1;
       document.getElementById("equipo2").innerHTML = puntosEquipo2;
     });
-
   }
-
 }
 
 function premio(premios) {
@@ -991,66 +991,63 @@ function premio(premios) {
 
 function calcular(rand) {
   valor = rand / 360;
-  valor = (valor - parseInt(valor.toString().split(".")[0]))* 360;
-  ruleta.style.transform = "rotate("+rand+"deg)";
+  valor = (valor - parseInt(valor.toString().split(".")[0])) * 360;
+  ruleta.style.transform = "rotate(" + rand + "deg)";
   console.log(valor);
   setTimeout(() => {
-  switch (true) {
-    case valor > 0 && valor <= 45:
-      console.log("Pierdes turno");
-      turnoEquipo1 = !turnoEquipo1;
-     break;
-     case valor > 45 && valor <= 90:
-      
-      mostrarPregunta(1);
-      
-     break;
-     case valor > 90 && valor <= 135:
-      mostrarPregunta(2);
-     break; 
-     case valor > 135 && valor <= 180:
-      console.log("Gira de nuevo");
-     break;
-     case valor > 180 && valor <= 225:
-      mostrarPregunta(3);
-     break; 
-     case valor > 225 && valor <= 270:
-      mostrarPregunta(1);
-     break;
-     case valor > 270 && valor <= 315:
-      mostrarPregunta(2);
-     break;
-     case valor > 315 && valor <= 360:
-      mostrarPregunta(0);
-     break;
-  }
+    switch (true) {
+      case valor > 0 && valor <= 45:
+        console.log("Pierdes turno");
+        turnoEquipo1 = !turnoEquipo1;
+        break;
+      case valor > 45 && valor <= 90:
+        mostrarPregunta(1);
 
- }, 5000);
-
+        break;
+      case valor > 90 && valor <= 135:
+        mostrarPregunta(2);
+        break;
+      case valor > 135 && valor <= 180:
+        console.log("Gira de nuevo");
+        break;
+      case valor > 180 && valor <= 225:
+        mostrarPregunta(3);
+        break;
+      case valor > 225 && valor <= 270:
+        mostrarPregunta(1);
+        break;
+      case valor > 270 && valor <= 315:
+        mostrarPregunta(2);
+        break;
+      case valor > 315 && valor <= 360:
+        mostrarPregunta(0);
+        break;
+    }
+  }, 5000);
 }
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function getQuestionBySubject(subjectNumber){
-  if(subjectNumber === 1){
-      const themeOneLength = subjectOneQuestionsList.length;
-      const questionIndexSelected = getRandomInt(themeOneLength);
-      const questionSelected = subjectOneQuestionsList[questionIndexSelected];
-      subjectOneQuestionsList.splice(questionIndexSelected, 1);
-      return questionSelected;
-  }else if(subjectNumber === 2){
-      const themeTwoLength = subjectTwoQuestionsList.length;
-      const questionIndexSelected = getRandomInt(themeTwoLength);
-      const questionSelected = subjectTwoQuestionsList[questionIndexSelected];
-      subjectTwoQuestionsList.splice(questionIndexSelected, 1);
-      return questionSelected;
-  }else if(subjectNumber === 3){
-      const themeThreeLength = subjectThreeQuestionsList.length;
-      const questionIndexSelected = getRandomInt(themeThreeLength);
-      const questionSelected = subjectThreeQuestionsList[questionIndexSelected];
-      subjectThreeQuestionsList.splice(questionIndexSelected, 1);
-      return questionSelected;
+function getQuestionBySubject(subjectNumber) {
+  if (subjectNumber === 1) {
+    const themeOneLength = subjectOneQuestionsList.length;
+    const questionIndexSelected = getRandomInt(themeOneLength);
+    const questionSelected = subjectOneQuestionsList[questionIndexSelected];
+    subjectOneQuestionsList.splice(questionIndexSelected, 1);
+    return questionSelected;
+  } else if (subjectNumber === 2) {
+    const themeTwoLength = subjectTwoQuestionsList.length;
+    const questionIndexSelected = getRandomInt(themeTwoLength);
+    const questionSelected = subjectTwoQuestionsList[questionIndexSelected];
+    subjectTwoQuestionsList.splice(questionIndexSelected, 1);
+    return questionSelected;
+  } else if (subjectNumber === 3) {
+    const themeThreeLength = subjectThreeQuestionsList.length;
+    const questionIndexSelected = getRandomInt(themeThreeLength);
+    const questionSelected = subjectThreeQuestionsList[questionIndexSelected];
+    subjectThreeQuestionsList.splice(questionIndexSelected, 1);
+    return questionSelected;
   }
 }
