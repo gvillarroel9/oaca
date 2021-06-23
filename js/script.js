@@ -924,7 +924,7 @@ function mostrarPregunta(categoria){
       }
     })
   }else{
-    let qst = subjectThreeQuestionsList[0]
+    let qst = getQuestionBySubject(categoria);
     Swal.fire({
       title: qst.question,
       showDenyButton: true,
@@ -1001,4 +1001,30 @@ function calcular(rand) {
 
  }, 5000);
 
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function getQuestionBySubject(subjectNumber){
+  if(subjectNumber === 1){
+      const themeOneLength = subjectOneQuestionsList.length;
+      const questionIndexSelected = getRandomInt(themeOneLength);
+      const questionSelected = subjectOneQuestionsList[questionIndexSelected];
+      subjectOneQuestionsList.splice(questionIndexSelected, 1);
+      return questionSelected;
+  }else if(subjectNumber === 2){
+      const themeTwoLength = subjectTwoQuestionsList.length;
+      const questionIndexSelected = getRandomInt(themeTwoLength);
+      const questionSelected = subjectTwoQuestionsList[questionIndexSelected];
+      subjectTwoQuestionsList.splice(questionIndexSelected, 1);
+      return questionSelected;
+  }else if(subjectNumber === 3){
+      const themeThreeLength = subjectThreeQuestionsList.length;
+      const questionIndexSelected = getRandomInt(themeThreeLength);
+      const questionSelected = subjectThreeQuestionsList[questionIndexSelected];
+      subjectThreeQuestionsList.splice(questionIndexSelected, 1);
+      return questionSelected;
+  }
 }
