@@ -1,4 +1,228 @@
 const ruleta = document.querySelector('#ruleta');
+var subjectTwoQuestionsList = [
+  {
+      question: "De qué principio del conductivismo es la siguiente definición:  Todo evento que fortalece el aprendizaje.",
+      options: [
+        {
+          title: "Refuerzo",
+          isCorrect: true
+        },
+        {
+          title: "Respuesta",
+          isCorrect: false
+        },
+        {
+          title: "Estímulo",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "Qué teoría del aprendizaje dice: El aprendizaje resulta cuando la información es almacenada en la memoria de una manera organizada y significativa",
+      options: [
+        {
+          title: "Constructivismo",
+          isCorrect: false
+        },
+        {
+          title: "Cognitivismo",
+          isCorrect: true
+        },
+        {
+          title: "Conductivismo",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Qué tipos de constructivismos hay?",
+      options: [
+        {
+          title: "Abstracto y preciso",
+          isCorrect: false
+        },
+        {
+          title: "Realista y radical",
+          isCorrect: true
+        },
+        {
+          title: "Discursivo y conservador",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Cuál de los siguientes aspectos no es un aspecto clave del constructivismo?",
+      options: [
+        {
+          title: "No fragmentar o descomponer",
+          isCorrect: false
+        },
+        {
+          title: "Actividades reales",
+          isCorrect: false
+        },
+        {
+          title: "Adoctrinación",
+          isCorrect: true
+        }
+      ]
+  },
+  {
+      question: "¿Qué es una guía de acciones que hay que seguir?",
+      options: [
+        {
+          title: "Una habilidad",
+          isCorrect: false
+        },
+        {
+          title: "Una estrategia",
+          isCorrect: true
+        },
+        {
+          title: "Una técnica",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: " ¿Qué es una actividad específica que puede ser utilizada de forma mecánica?",
+      options: [
+        {
+          title: "Una estrategia",
+          isCorrect: false
+        },
+        {
+          title: "Una técnica",
+          isCorrect: true
+        },
+        {
+          title: "Una habilidad",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Cuál es la estrategia que es utilizada por el maestro con intención de ayudar a los estudiantes a aprender?",
+      options: [
+        {
+          title: "Estrategia de aprendizaje",
+          isCorrect: false
+        },
+        {
+          title: "Estrategia instruccional ",
+          isCorrect: true
+        },
+        {
+          title: "Estrategia de escucha",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Cuáles son las estrategias que los individuos las emplean por sí mismos para aprender?",
+      options: [
+        {
+          title: "Estrategia de aprendizaje",
+          isCorrect: true
+        },
+        {
+          title: "Estrategia instruccional",
+          isCorrect: false
+        },
+        {
+          title: "Estrategia de escucha",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Qué es una capacidad que se ejerce sobre un contenido?",
+      options: [
+        {
+          title: "Un objetivo",
+          isCorrect: true
+        },
+        {
+          title: "Una competencia",
+          isCorrect: false
+        },
+        {
+          title: "Una estrategia",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Qué es la posibilidad de un conjunto integrado de recursos para resolver un problema?",
+      options: [
+        {
+          title: "Un objetivo",
+          isCorrect: false
+        },
+        {
+          title: "Una competencia",
+          isCorrect: true
+        },
+        {
+          title: "Una estrategia",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Cuál no es una característica de una competencia?",
+      options: [
+        {
+          title: "Moviliza un conjunto de recursos",
+          isCorrect: false
+        },
+        {
+          title: "No es evaluable ",
+          isCorrect: true
+        },
+        {
+          title: "Está ligada a una familia de situaciones",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: " ¿Cuál es el tipo de estrategia en el ámbito académico que implica la repetición activa de los contenidos o centrarse en partes claves de él?",
+      options: [
+        {
+          title: "Ensayo",
+          isCorrect: true
+        },
+        {
+          title: "Elaboración",
+          isCorrect: false
+        },
+        {
+          title: "Organización",
+          isCorrect: false
+        }
+      ]
+  },
+  {
+      question: "¿Cuál es el tipo de estrategia que hace conexiones entre lo nuevo y lo familiar?",
+      options: [
+        {
+          title: "Ensayo",
+          isCorrect: false
+        },
+        {
+          title: "Apoyo Afectivo",
+          isCorrect: false
+        },
+        {
+          title: "Elaboración",
+          isCorrect: true
+        }
+      ]
+  }
+]
+
 var subjectThreeQuestionsList = [
   {
     question: " ¿En qué web los usuarios únicamente son receptores de información?",
@@ -172,6 +396,8 @@ var subjectThreeQuestionsList = [
   }
   
 ];
+
+
 
 ruleta.addEventListener('click', girar);
 function girar(){
