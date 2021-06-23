@@ -892,12 +892,13 @@ var subjectThreeQuestionsList = [
 ];
 
 ruleta.addEventListener("click", girar);
-
 let turnoEquipo1 = true;
 let puntosEquipo1 = 0;
 let puntosEquipo2 = 0;
 
 function girar() {
+  document.getElementById("vara").classList.add("roll");
+
   let rand = Math.random() * 7200;
   calcular(rand);
   var sonido = document.querySelector("#audio");
@@ -906,6 +907,7 @@ function girar() {
 
 function mostrarPregunta(categoria) {
   //0 Escoge tema - 1 OACA - 2 Teorias del aprendizaje  - 3 Web Social
+  document.getElementById("vara").classList.remove("roll");
   console.log(categoria);
   if (!categoria) {
     Swal.fire({
@@ -998,6 +1000,7 @@ function calcular(rand) {
     switch (true) {
       case valor > 0 && valor <= 45:
         console.log("Pierdes turno");
+        document.getElementById("vara").classList.remove("roll");
         turnoEquipo1 = !turnoEquipo1;
         break;
       case valor > 45 && valor <= 90:
@@ -1009,6 +1012,7 @@ function calcular(rand) {
         break;
       case valor > 135 && valor <= 180:
         console.log("Gira de nuevo");
+        document.getElementById("vara").classList.remove("roll");
         break;
       case valor > 180 && valor <= 225:
         mostrarPregunta(3);
