@@ -6,43 +6,48 @@ function girar(){
     calcular(rand);
     var sonido = document.querySelector('#audio');
     sonido.setAttribute('src', 'sonido/ruleta.mp3');
-    mostrarPregunta(1)
+    mostrarPregunta(0)
 }
 
 function mostrarPregunta(categoria){
-  Swal.fire({
-    title: 'Pregunta 1',
-    showDenyButton: true,
-    showCancelButton: true,
-    cancelButtonText: `Opcion 3`,
-    confirmButtonText: `Opcion 1`,
-    denyButtonText: `Opcion 2`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    console.log(result);
-    if (result.isConfirmed) {
-      Swal.fire('Saved!', '', 'success')
-    } else if (result.isDenied) {
-      Swal.fire('Changes are not saved', '', 'info')
-    }
-  })
+  //0 Escoge tema - 1 OACA - 2 Teorias del aprendizaje  - 3 Web Social
   if(!categoria){
-    
-  }else{
     Swal.fire({
-      title: 'Do you want to save the changes?',
+      title: 'Elige un tema',
       showDenyButton: true,
       showCancelButton: true,
-      cancelButtonText: `Opcion 3`,
-      confirmButtonText: `Opcion 1`,
-      denyButtonText: `Opcion 2`,
+      cancelButtonText: `OACA`,
+      confirmButtonText: `TEORÍAS DEL APRENDIZAJE`,
+      denyButtonText: `WEB SOCIAL`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
-      console.log(result);
-      if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success')
-      } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+      if (result.isDismissed) {
+        mostrarPregunta(1);
+        console.log("OACA");
+      } else if (result.isConfirmed) {
+        mostrarPregunta(2);
+        console.log("TAPRE");
+      } else if (result.isDenied){
+        mostrarPregunta(3);
+        console.log("WEB");
+      }
+    })
+  }else{
+    Swal.fire({
+      title: 'Pregunta 1',
+      showDenyButton: true,
+      showCancelButton: true,
+      cancelButtonText: `Opcion 1`,
+      confirmButtonText: `Opcion 2`,
+      denyButtonText: `Opcion 3`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isDismissed) {
+        //mostrarPregunta(1);
+      } else if (result.isConfirmed) {
+        //mostrarPregunta(2);
+      } else if (result.isDenied){
+        //mostrarPregunta(3);
       }
     })
   }
