@@ -179,11 +179,11 @@ function girar(){
     calcular(rand);
     var sonido = document.querySelector('#audio');
     sonido.setAttribute('src', 'sonido/ruleta.mp3');
-    mostrarPregunta(0)
 }
 
 function mostrarPregunta(categoria){
   //0 Escoge tema - 1 OACA - 2 Teorias del aprendizaje  - 3 Web Social
+  console.log(categoria);
   if(!categoria){
     Swal.fire({
       title: 'Elige un tema',
@@ -206,21 +206,37 @@ function mostrarPregunta(categoria){
       }
     })
   }else{
+    let qst = subjectThreeQuestionsList[0]
     Swal.fire({
-      title: 'Pregunta 1',
+      title: qst.question,
       showDenyButton: true,
       showCancelButton: true,
-      cancelButtonText: `Opcion 1`,
-      confirmButtonText: `Opcion 2`,
-      denyButtonText: `Opcion 3`,
+      cancelButtonText: qst.options[0].title,
+      confirmButtonText: qst.options[1].title,
+      denyButtonText: qst.options[2].title,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isDismissed) {
         //mostrarPregunta(1);
+        if(qst.options[0].isCorrect){
+          Swal.fire('Correcta', '', 'success')
+        }else{
+          Swal.fire('Incorrecta', '', 'error')
+        }
       } else if (result.isConfirmed) {
         //mostrarPregunta(2);
+        if(qst.options[1].isCorrect){
+          Swal.fire('Correcta', '', 'success')
+        }else{
+          Swal.fire('Incorrecta', '', 'error')
+        }
       } else if (result.isDenied){
         //mostrarPregunta(3);
+        if(qst.options[2].isCorrect){
+          Swal.fire('Correcta', '', 'success')
+        }else{
+          Swal.fire('Incorrecta', '', 'error')
+        }
       }
     })
   }
@@ -238,32 +254,34 @@ function premio(premios){
   valor = rand / 360;
   valor = (valor - parseInt(valor.toString().split(".")[0]))* 360;
   ruleta.style.transform = "rotate("+rand+"deg)";
-
+  console.log(valor);
   setTimeout(() => {
   switch (true) {
     case valor > 0 && valor <= 45:
-     premio("2 estrellas");
+      console.log("Pierdes turno"); 
      break;
      case valor > 45 && valor <= 90:
-     premio("5 Piezas");
+      
+      mostrarPregunta(1);
+      
      break;
      case valor > 90 && valor <= 135:
-     premio("2 Corazón"); 
+      mostrarPregunta(2);
      break; 
      case valor > 135 && valor <= 180:
-     premio("2 Nigiri");
+      console.log("Gira de nuevo");
      break;
      case valor > 180 && valor <= 225:
-     premio("Handroll Mini");
+      mostrarPregunta(3);
      break; 
      case valor > 225 && valor <= 270:
-     premio("NO HAY CORTESIAS ESTA VEZ");
+      mostrarPregunta(1);
      break;
      case valor > 270 && valor <= 315:
-     premio("Una Coca Cola de 2L");
+      mostrarPregunta(2);
      break;
      case valor > 315 && valor <= 360:
-     premio("2 Enjoy"); 
+      mostrarPregunta(0);
      break;
   }
 
